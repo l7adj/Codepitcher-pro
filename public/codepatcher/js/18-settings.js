@@ -22,7 +22,7 @@ function applyFont() {
 }
 function openSettings() {
   const seg = (cur, key, opts) => opts.map(([v, l]) => `<button type="button" class="btn ${cur === v ? 'sel' : ''}" data-act="${key}" data-v="${v}">${l}</button>`).join('');
-  const build = () => `<h3>الإعدادات</h3>
+  const build = () => `<div class="settings-layout"><h3>الإعدادات</h3>
     <div class="slabel">حجم الخط</div>
     <div class="srow"><button type="button" class="btn" data-act="fs-" >A−</button><div class="fs-readout">${S.fs}px</div><button type="button" class="btn" data-act="fs+">A+</button></div>
     <div class="slabel">المظهر</div>
@@ -51,7 +51,7 @@ function openSettings() {
     <div class="slabel">الأمان والاختبار</div>
     <div class="srow"><button type="button" class="btn" data-act="pal">لوحة الأوامر</button><button type="button" class="btn" data-act="snaps">نقاط الحفظ</button><button type="button" class="btn" data-act="selftest">اختبار ذاتي</button></div>
     <div class="srow"><button type="button" class="btn" data-act="vers">الإصدارات والتصحيحات</button></div>
-    <button type="button" class="btn" data-ui="cancel">إغلاق</button>`;
+    <button type="button" class="btn" data-ui="cancel">إغلاق</button></div>`;
   const handler = (act, el) => {
     if (act === 'vers') { ui.close(null); setTimeout(showV1, 120); return; }
     if (act === 'inst') { installApp(); return; } if (act === 'pal') { ui.close(null); setTimeout(openPalette, 120); return; } if (act === 'snaps') { ui.close(null); showSnaps(); return; } if (act === 'selftest') { ui.close(null); runSelfTest(); return; }
