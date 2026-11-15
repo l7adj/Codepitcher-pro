@@ -28,11 +28,11 @@ body.side-open > .tabbar,
 body.side-open > .nav,
 body.side-open > .panels,
 body.side-open > .symbol-bar {
-  transform: translateX(var(--dw));
+  transform: translateX(calc(-1 * var(--dw)));
 }
 
 /* ── الهواتف (< 480px): ملاءمة شريط المحرر بالكامل ── */
-@media (max-width: 480px) {
+@media (max-width: 480px) {\n  :root { --dw: min(94vw, 420px); --explorer-inset: 12px; }\n  .dtool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .bottom-bar { gap: 3px; padding-inline: 6px; }
   .bbtn { min-width: 32px; }
 }
