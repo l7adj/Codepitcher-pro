@@ -13,8 +13,12 @@ function selFiles() {
 }
 function updateSelBar() {
   const n = selFiles().length;
-  $('selCount').textContent = selSet.size ? n + ' ملف محدد' : 'اختر عناصر';
+  const dirs = [...selSet].filter(k => k.startsWith('d:')).length;
+  const count = $('selCount');
+  if (count) count.textContent = selSet.size ? n + ' ملف · ' + dirs + ' مجلد محدد' : 'اختر عناصر';
   document.querySelectorAll('#selbar .sb[data-need]').forEach(b => { b.disabled = !n; });
+  const all = $('selbar') && $('selbar').querySelector('[aria-label="تحديد الكل"]');
+  if (all) all.setAttribute('aria-label', selSet.size ? 'عكس التحديد الحالي' : 'تحديد كل العناصر الظاهرة');
 }
 function toggleSel(on) {
   selMode = on == null ? !selMode : !!on; selSet.clear();
