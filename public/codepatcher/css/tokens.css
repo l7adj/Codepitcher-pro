@@ -94,7 +94,7 @@
   --dialog-max-height: 90dvh;
   --dialog-preview-max: 38vh;
   --dialog-field-height: 46px;
-  --menu-item-height: 48px;
+  --menu-item-height: 48px;\n  --explorer-menu-safe: 10px;
 
   /* ── الحركة والتركيز والطبقات ── */
   --motion-fast: 140ms;
