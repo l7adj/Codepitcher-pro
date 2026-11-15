@@ -1070,3 +1070,102 @@ body > header, body > .tabbar, body > .nav, body > .panels, body > .symbol-bar {
 .sr { display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 5px 10px; background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 12px; direction: ltr; text-align: left; cursor: pointer; white-space: pre; overflow: hidden; flex-shrink: 0; }
 .sr:hover { border-color: var(--border-default); background: var(--surface-hover); }
 .sr b { color: var(--text-muted); min-width: 30px; text-align: right; font-variant-numeric: tabular-nums; }
+
+
+/* ==========================================================================
+   Explorer UX v2 — RTL-first interaction and mobile information hierarchy.
+   The existing component tokens remain the single source of visual values.
+   ========================================================================== */
+.dback {
+  inset: 0;
+  right: 0;
+  left: 0;
+  background: var(--surface-backdrop, rgba(5, 8, 15, .48));
+  opacity: 0;
+  transition: opacity var(--motion-standard) var(--ease-standard);
+}
+.dback.open { opacity: 1; }
+.drawer {
+  left: auto;
+  right: 0;
+  width: var(--dw);
+  border-right: 0;
+  border-left: 1px solid var(--border-default);
+  transform: translateX(105%);
+  overscroll-behavior: contain;
+}
+.drawer.open { transform: translateX(0); }
+.dhead {
+  min-height: calc(var(--touch-target) + 12px);
+  padding: 10px var(--explorer-inset);
+  gap: 8px;
+}
+.dhead .btn { min-width: 0; }
+.dbody {
+  padding: 14px var(--explorer-inset) calc(16px + env(safe-area-inset-bottom));
+  gap: 12px;
+}
+.explorer-head { min-height: 48px; }
+.explorer-mark { width: 42px; height: 42px; flex-basis: 42px; }
+.explorer-title b { font-size: 14px; }
+.explorer-count { padding: 6px 10px; }
+.explorer-search { min-height: 46px; height: 46px; }
+.explorer-search input { min-height: 44px; height: 44px; }
+.dtool-grid {
+  grid-template-columns: repeat(var(--explorer-tool-columns), minmax(0, 1fr));
+  gap: 8px;
+}
+.dtb {
+  min-height: 62px;
+  height: 62px;
+  gap: 6px;
+  border-radius: var(--radius-card);
+  font-size: 11px;
+}
+.dtb svg { width: 19px; height: 19px; }
+.scr {
+  gap: 6px;
+  padding: 4px 1px calc(20px + env(safe-area-inset-bottom));
+}
+.tree-location { padding: 3px 2px 8px; gap: 7px; }
+.cr { min-height: 34px; height: 34px; padding-inline: 11px; }
+.tree-section-label { padding: 9px 5px 4px; }
+.tr {
+  min-height: var(--explorer-row-height);
+  height: var(--explorer-row-height);
+  gap: 8px;
+  padding-inline: 8px;
+  border-radius: var(--radius-card);
+}
+.tr .fi { width: 36px; height: 36px; flex-basis: 36px; }
+.tr .fi svg { width: 19px; height: 19px; }
+.tr .nm { font-size: 13px; font-weight: 600; }
+.tr .mb {
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+  background: var(--surface-control-flat);
+  border-color: var(--border-subtle);
+}
+.tr .mb:focus-visible,
+.tr .tl:focus-visible,
+.tr[role="button"]:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 1px;
+}
+.tr .tl {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: inherit;
+  text-align: start;
+  font: inherit;
+  cursor: pointer;
+}
+.selbar { min-height: 50px; height: auto; padding: 4px 6px; }
+.selbar .sb { min-width: 40px; min-height: 40px; }
+.explorer-empty { min-height: 210px; padding: 28px 18px; }
+#pop { max-height: min(72vh, 560px); overflow-y: auto; overscroll-behavior: contain; }
