@@ -103,15 +103,6 @@ treeEl.addEventListener('touchstart', e => {
 ['touchend', 'touchmove', 'touchcancel'].forEach(t => treeEl.addEventListener(t, () => clearTimeout(lpT), { passive: true }));
 treeEl.addEventListener('contextmenu', e => { e.preventDefault(); clearTimeout(lpT); if (!lpFired) { lpFired = true; ctxFromEl(e.target); } });
 treeEl.addEventListener('click', e => { if (lpFired) { lpFired = false; e.stopPropagation(); e.preventDefault(); } }, true);
-treeEl.addEventListener('keydown', e => {
-  if (e.key !== 'Enter' && e.key !== ' ') return;
-  if (e.target.closest('button, input')) return;
-  const row = e.target.closest('.tr[role="button"]');
-  if (!row) return;
-  e.preventDefault();
-  if (selMode) selToggle('file', row.dataset.id);
-  else if (row.dataset.id) openFileById(row.dataset.id);
-});
 $('drawer').addEventListener('click', e => {
   const a = e.target.closest('[data-act]'); if (!a) return;
   const t = a.dataset.act;
