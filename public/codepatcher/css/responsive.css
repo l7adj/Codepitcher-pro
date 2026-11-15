@@ -345,3 +345,67 @@ body.side-open > .symbol-bar {
 @media (prefers-reduced-motion: reduce) {
   #p-patch *, #v1Body *, #p-log *, #p-run * { scroll-behavior: auto !important; }
 }
+
+
+/* Editor shell v2 — file navigation, cursor status and mobile code canvas. */
+#tabbar {
+  gap: var(--editor-tab-gap);
+  scroll-padding-inline: 12px;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-inline: contain;
+}
+#tabbar .filet {
+  min-width: 0;
+  max-width: min(58vw, 320px);
+  scroll-snap-align: center;
+}
+#tabbar .filet > span[dir="ltr"] {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#tabbar .filet .x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  border-radius: var(--radius-xs);
+  color: var(--text-muted);
+  cursor: pointer;
+}
+#tabbar .filet .x:hover,
+#tabbar .filet .x:focus-visible { color: var(--color-danger); background: var(--color-danger-bg); }
+#tabbar .filet:focus-visible { outline: 2px solid var(--border-focus); outline-offset: -2px; }
+.status {
+  min-height: 32px;
+  height: auto;
+  padding-inline: var(--panel-inset);
+}
+.status .tap {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  appearance: none;
+  min-height: 28px;
+  cursor: pointer;
+}
+.find-bar { padding-inline: var(--panel-inset); }
+.find-row { min-width: 0; }
+.find-row input { min-width: 0; }
+.symbol-bar { scroll-snap-type: x proximity; overscroll-behavior-inline: contain; }
+.sym-btn { scroll-snap-align: center; }
+.bottom-bar { padding-inline: var(--panel-inset); }
+.bbtn { min-width: 40px; min-height: 40px; }
+@media (max-width: 370px) {
+  :root { --editor-gutter-width: 36px; --editor-pad-inline: 8px; --editor-pad-block: 10px; --editor-tab-gap: 3px; }
+  #tabbar .filet { max-width: 66vw; padding-inline: 4px 7px; gap: 5px; }
+  #tabbar .filet .x { width: 25px; min-width: 25px; height: 25px; }
+  .status { gap: 4px; padding-inline: 7px; }
+  .status .tap { padding-inline: 3px; }
+}
+@media (min-width: 680px) {
+  :root { --editor-gutter-width: 52px; --editor-pad-inline: 16px; }
+}
