@@ -538,3 +538,26 @@ body.side-open > .symbol-bar {
   }
   #bnIn { min-height: 220px; }
 }
+
+
+/* Explorer refinements across compact phone widths. */
+@media (max-width: 679px) {
+  .drawer { width: min(var(--dw), 94vw); }
+  .dbody { padding-inline: var(--explorer-inset); }
+  .tree-location { min-width: 0; }
+  .crumbs { max-width: 100%; padding-block: 3px 6px; }
+  .crumbs .cr { min-height: 36px; padding-inline: 10px; }
+  .tr { touch-action: pan-y; }
+  .tr .tl { min-height: var(--explorer-row-height); }
+  .tr .mb { width: var(--touch-target); height: var(--touch-target); }
+  .selbar { position: sticky; bottom: 0; z-index: 3; }
+  .selbar .sc { line-height: 1.35; }
+}
+@media (max-width: 370px) {
+  .explorer-head { gap: 6px; }
+  .explorer-title { gap: 7px; }
+  .explorer-title b { font-size: 12.5px; }
+  .explorer-count { padding-inline: 6px; }
+  .selbar { gap: 1px; }
+  .selbar .sb { min-width: 36px; }
+}
