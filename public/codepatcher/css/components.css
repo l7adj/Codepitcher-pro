@@ -655,3 +655,98 @@ textarea.plain:focus,
   outline: 2px solid var(--border-focus);
   outline-offset: -2px;
 }
+
+
+/* Dialog workflow refinement — import/export, diagnostics and context actions. */
+.sheet {
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scroll-padding-block: 14px;
+}
+.sheet > input,
+.sheet > textarea,
+.sheet > .plain,
+.sheet > .srow,
+.sheet > .bn-sec,
+.sheet > .scroll-box,
+.sheet > .issue {
+  min-width: 0;
+}
+.sheet > input,
+.sheet > textarea,
+.sheet > .plain {
+  width: 100%;
+  max-width: 100%;
+}
+.sheet > input,
+.sheet > .sheet-field {
+  min-height: var(--dialog-field-height);
+}
+.sheet > textarea,
+.sheet > .plain {
+  line-height: 1.65;
+  tab-size: 2;
+}
+#bnIn {
+  min-height: clamp(150px, 27vh, 260px);
+  max-height: var(--dialog-preview-max);
+  resize: vertical;
+}
+#bnPrev {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 7px;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+#bnPrev > .slabel { max-width: 100%; }
+#bnPrev .ltr-text { overflow-wrap: anywhere; }
+.bn-sec {
+  min-width: 0;
+  padding: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  background: var(--surface-card-flat);
+}
+.bn-sec > .slabel { line-height: 1.6; }
+.bn-sec > .mi { background: var(--surface-card); }
+.sheet .scroll-box {
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+.sheet .scroll-box > .issue { flex-shrink: 0; }
+.errcard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.errcard-head { align-items: flex-start; }
+.errcard-title { min-width: 0; line-height: 1.5; }
+.errcard-row { min-width: 0; align-items: flex-start; }
+.errcard-row .k { flex: 0 0 76px; }
+.errcard-row .v { min-width: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.errcard-actions .copy-ai {
+  min-height: var(--touch-target);
+  flex: 1 1 132px;
+  justify-content: center;
+  white-space: normal;
+  line-height: 1.35;
+}
+#pop {
+  max-height: min(72dvh, 560px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+.pi { min-height: var(--menu-item-height); }
+.pi + .pi { border-top: 1px solid var(--border-subtle); border-radius: 0; }
+.pi.dng { color: var(--color-danger); }
+.pi.dng svg { color: var(--color-danger); }
+.sheet :is(button, input, textarea, select):focus-visible,
+.pop :focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
