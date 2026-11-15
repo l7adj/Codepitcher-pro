@@ -1169,3 +1169,40 @@ body > header, body > .tabbar, body > .nav, body > .panels, body > .symbol-bar {
 .selbar .sb { min-width: 40px; min-height: 40px; }
 .explorer-empty { min-height: 210px; padding: 28px 18px; }
 #pop { max-height: min(72vh, 560px); overflow-y: auto; overscroll-behavior: contain; }
+
+
+/* Explorer interaction model: clear row hierarchy and semantic breadcrumb controls. */
+.crumbs .cr {
+  appearance: none;
+  font: var(--text-xs) var(--font-ui);
+  line-height: 1;
+  text-decoration: none;
+}
+.crumbs .cr:focus-visible,
+.tree-location .cr:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+.tr[data-id],
+.tr[data-p] { contain: layout paint; }
+.tr .tl { border: 0; background: transparent; color: inherit; padding: 0; text-align: start; }
+.tr .tl:focus-visible,
+.tr .mb:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 1px;
+  border-radius: var(--radius-sm);
+}
+.tr .mb { min-width: var(--touch-target); min-height: var(--touch-target); }
+.tr .nm { overflow-wrap: anywhere; }
+.tr[data-path] .nm { unicode-bidi: plaintext; }
+.tr.chk .tl { color: var(--text-primary); }
+.tr.act .fi { background: var(--color-primary-soft); }
+.tree-section-label.search-results {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--surface-drawer);
+  padding-block: 8px;
+}
+.tree-location .cr { flex: 0 0 auto; }
+.scr { scroll-padding-block: 8px; }
