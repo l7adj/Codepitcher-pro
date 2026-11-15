@@ -125,7 +125,7 @@ function popMenu(kind, key, row) {
   const p = document.createElement('div'); p.id = 'pop'; p.className = 'pop'; p.innerHTML = h; document.body.append(b, p);
   const r = row.getBoundingClientRect(), w = p.offsetWidth, ph = p.offsetHeight;
   let top = r.bottom + 4; if (top + ph > window.innerHeight - 8) top = Math.max(8, r.top - ph - 4);
-  p.style.top = top + 'px'; p.style.left = Math.max(8, Math.min(r.left + 36, window.innerWidth - w - 8)) + 'px';
+  p.style.top = top + 'px'; p.style.left = Math.max(8, Math.min(r.right - w - 8, window.innerWidth - w - 8)) + 'px';
   p.addEventListener('click', async e => {
     const x = e.target.closest('[data-pa]'); if (!x) return; const a = x.dataset.pa; closePop();
     if (a === 'open') openFileById(key);
