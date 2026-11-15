@@ -192,3 +192,166 @@ body.side-open > .symbol-bar {
     animation: none !important;
   }
 }
+
+
+/* ==========================================================================
+   Workspace Experience v2 — coherent screen architecture.
+   Mobile-first; all dimensions resolve through the central token layer.
+   ========================================================================== */
+:root {
+  --panel-inset: 14px;
+  --panel-gap: 14px;
+  --panel-card-pad: 14px;
+  --panel-editor-min: 230px;
+  --panel-content-max: 1280px;
+  --panel-toolbar-height: 52px;
+  --panel-sticky-offset: 0px;
+}
+
+/* Shared screen rhythm */
+#p-patch .form { padding: var(--panel-inset) var(--panel-inset) calc(24px + env(safe-area-inset-bottom)); }
+#p-patch .patch-workspace,
+#v1Body,
+#p-log .loglist { gap: var(--panel-gap); }
+#p-patch .patch-workspace { max-width: var(--panel-content-max); }
+#p-patch .patch-compose,
+#p-patch .patch-inspector {
+  padding: var(--panel-card-pad);
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+  box-shadow: var(--surface-sheen);
+}
+#p-patch .help-box { background: var(--surface-card-flat); }
+#p-patch .patch-bridge .btn { min-height: 44px; white-space: normal; line-height: 1.45; }
+#patchInput {
+  min-height: var(--panel-editor-min);
+  max-height: 58vh;
+  line-height: 1.7;
+  border-radius: var(--radius-card);
+  tab-size: 2;
+}
+#p-patch .form-row.even { display: grid; grid-template-columns: 1fr 1.15fr 1fr; }
+#p-patch .form-row.even .btn { min-width: 0; min-height: 46px; }
+#p-patch .form-row.even .btn.success { box-shadow: var(--shadow-primary); }
+#p-patch .patch-tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#p-patch .patch-tools .btn { min-height: 42px; white-space: normal; line-height: 1.35; }
+#p-patch .opts { margin-top: 2px; }
+#p-patch .patch-inspector > #smokeBox:empty,
+#p-patch .patch-inspector > #patchSummary:empty,
+#p-patch .patch-inspector > #patchErrors:empty { display: none; }
+#p-patch .patch-inspector > #smokeBox:not(:empty),
+#p-patch .patch-inspector > #patchSummary:not(:empty),
+#p-patch .patch-inspector > #patchErrors:not(:empty) {
+  padding: 10px;
+  background: var(--surface-card-flat);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+}
+#p-patch .plist { min-width: 0; }
+
+/* Version timeline and comparison */
+#v1Body { padding: var(--panel-inset) var(--panel-inset) calc(28px + env(safe-area-inset-bottom)); }
+.v1-top {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  min-height: var(--panel-toolbar-height);
+  margin: -2px -2px 0;
+  padding: 4px 2px 9px;
+  background: var(--surface-app);
+}
+.v1-top h3 { font-size: 17px; }
+.v1-tabs { position: sticky; top: var(--panel-toolbar-height); z-index: 2; }
+.v1-workspace { gap: 16px; }
+.v1-hero { align-items: center; min-width: 0; }
+.v1-ht { flex: 1; }
+.v1-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.v1-tile { min-height: 74px; font-size: var(--text-md); }
+.tl { min-width: 0; }
+.tl-card { padding: 13px; }
+.tl-item { min-width: 0; }
+.tl-item.rel .tl-card { cursor: pointer; }
+.v1-compare { min-width: 0; }
+.v1-compare select,
+.v1-compare input,
+.v1-compare .btn { max-width: 100%; }
+.v1-compare .srow { display: flex; flex-wrap: wrap; gap: 8px; }
+.v1-compare .srow > .btn { flex: 1 1 140px; min-width: 0; white-space: normal; }
+.v1-pane-hidden { display: none; }
+
+/* Preview becomes a proper workspace with a stable toolbar and console sheet */
+#p-run { min-height: 0; }
+#p-run .runbar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
+  min-height: var(--panel-toolbar-height);
+  align-items: center;
+  padding: 7px var(--panel-inset);
+  padding-top: max(7px, env(safe-area-inset-top));
+}
+#p-run .runbar button { min-height: 42px; }
+#runFrame { min-height: 180px; }
+#p-run .verbar { padding-inline: var(--panel-inset); }
+#p-run .con-pane {
+  max-height: min(58vh, 520px);
+  height: 48%;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+#p-run .con-head { min-height: 48px; }
+#p-run .con-list { overscroll-behavior: contain; }
+
+/* Operation history: readable event cards and predictable actions */
+#p-log .log-toolbar {
+  min-height: var(--panel-toolbar-height);
+  padding: 9px var(--panel-inset);
+  gap: 9px;
+}
+#p-log .log-toolbar .btn { min-height: 42px; white-space: normal; line-height: 1.35; }
+#p-log .loglist {
+  padding: var(--panel-inset) var(--panel-inset) calc(28px + env(safe-area-inset-bottom));
+  scroll-padding-block: 12px;
+}
+#p-log .loglist .issue {
+  align-items: flex-start;
+  padding: 13px;
+  gap: 8px 10px;
+  border-radius: var(--radius-card);
+  cursor: default;
+}
+#p-log .loglist .issue .slabel { overflow-wrap: anywhere; line-height: 1.65; }
+#p-log .loglist .issue .srow { display: flex; flex-wrap: wrap; gap: 7px; }
+#p-log .loglist .issue .srow .btn { flex: 1 1 130px; min-width: 0; }
+
+/* RTL drawer placement must remain consistent at tablet and desktop widths. */
+@media (min-width: 680px) {
+  :root { --panel-inset: 20px; --panel-gap: 18px; --panel-card-pad: 17px; }
+  .drawer { left: auto !important; right: max(0px, calc(50vw - 430px)) !important; width: min(420px, 92vw); }
+  .dback { left: 0; right: 0; }
+}
+@media (min-width: 960px) {
+  :root { --panel-inset: 24px; --panel-gap: 20px; --panel-card-pad: 18px; }
+  .drawer { left: auto !important; right: max(0px, calc(50vw - 720px)) !important; width: 390px; }
+  #p-patch .form { padding: 20px var(--panel-inset) 28px; }
+  #p-patch .patch-workspace { gap: 20px; }
+  #p-patch .patch-compose,
+  #p-patch .patch-inspector { position: sticky; top: 10px; max-height: calc(100vh - 150px); overflow: auto; }
+  #p-patch .patch-inspector { top: 10px; }
+  .v1-top { top: 0; }
+  .v1-tabs { top: var(--panel-toolbar-height); }
+}
+@media (max-width: 370px) {
+  :root { --panel-inset: 10px; --panel-card-pad: 10px; --panel-gap: 10px; }
+  #p-patch .patch-bridge { grid-template-columns: 1fr; }
+  #p-patch .patch-tools { grid-template-columns: 1fr; }
+  #p-patch .form-row.even { grid-template-columns: 1fr 1fr; }
+  #p-patch .form-row.even .btn.success { grid-column: 1 / -1; grid-row: 1; }
+  .v1-hero { align-items: flex-start; gap: 10px; padding: 11px; }
+  .v1-ring { width: 52px; height: 52px; }
+  .v1-tile { min-height: 66px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #p-patch *, #v1Body *, #p-log *, #p-run * { scroll-behavior: auto !important; }
+}
