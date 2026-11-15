@@ -20,7 +20,16 @@ function render() {
     d.title = f.id === activeId ? 'اضغط لإعادة تسمية الملف' : f.name;
     d.append(dot, nm, x);
     d.addEventListener('click', () => { if (f.id === activeId) renameFile(); else { saveCursor(); activeId = f.id; render(); scheduleSave(); } });
-    d.addEventListener('keydown', ev => {\n      if (ev.target === x) return;\n      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); d.click(); return; }\n      if (ev.key !== 'ArrowLeft' && ev.key !== 'ArrowRight' && ev.key !== 'Home' && ev.key !== 'End') return;\n      ev.preventDefault();\n      const tabs = Array.from(tb.querySelectorAll('.filet[role="group"]'));\n      const at = tabs.indexOf(d);\n      const next = ev.key === 'Home' ? tabs[0] : ev.key === 'End' ? tabs[tabs.length - 1] : tabs[(at + (ev.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];\n      if (next) { next.focus(); next.click(); }\n    });
+    d.addEventListener('keydown', ev => {
+      if (ev.target === x) return;
+      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); d.click(); return; }
+      if (ev.key !== 'ArrowLeft' && ev.key !== 'ArrowRight' && ev.key !== 'Home' && ev.key !== 'End') return;
+      ev.preventDefault();
+      const tabs = Array.from(tb.querySelectorAll('.filet[role="group"]'));
+      const at = tabs.indexOf(d);
+      const next = ev.key === 'Home' ? tabs[0] : ev.key === 'End' ? tabs[tabs.length - 1] : tabs[(at + (ev.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+      if (next) { next.focus(); next.click(); }
+    });
     tb.appendChild(d); if (f.id === activeId) activeEl = d;
   });
   if (activeEl && activeEl.scrollIntoView) activeEl.scrollIntoView({ inline: 'center', block: 'nearest' });
