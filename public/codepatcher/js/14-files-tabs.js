@@ -5,19 +5,22 @@ function render() {
   if (activeId) { openTabs.add(activeId); if (recent[0] !== activeId) recent = [activeId].concat(recent.filter(x => x !== activeId)).slice(0, 10); }
   const valid = new Set(files.map(f => f.id));
   openTabs.forEach(i => { if (!valid.has(i)) openTabs.delete(i); });
-  const tb = $('tabbar'); tb.textContent = ''; tb.setAttribute('role', 'tablist'); tb.setAttribute('aria-label', 'الملفات المفتوحة'); tb.setAttribute('aria-orientation', 'horizontal');
-  if (!files.length) { const d = document.createElement('div'); d.className = 'filet active'; d.setAttribute('role', 'tab'); d.setAttribute('aria-selected', 'true'); d.tabIndex = 0; d.textContent = 'لا يوجد ملف'; tb.appendChild(d); }
+  const tb = $('tabbar'); tb.textContent = ''; tb.setAttribute('role', 'group'); tb.setAttribute('aria-label', 'الملفات المفتوحة');
+  if (!files.length) { const d = document.createElement('div'); d.className = 'filet active'; d.setAttribute('role', 'note'); d.tabIndex = 0; d.textContent = 'لا يوجد ملف'; tb.appendChild(d); }
   let activeEl = null;
   files.filter(f => openTabs.has(f.id)).forEach(f => {
     const d = document.createElement('div');
-    d.className = 'filet' + (f.id === activeId ? ' active' : '') + (f.content !== f.baseline ? ' dirty' : '');\n    d.setAttribute('role', 'tab'); d.setAttribute('aria-selected', String(f.id === activeId)); d.setAttribute('aria-controls', 'editor'); d.tabIndex = f.id === activeId ? 0 : -1; d.setAttribute('aria-label', f.name + (f.content !== f.baseline ? '، تغييرات غير محفوظة' : ''));
+    d.className = 'filet' + (f.id === activeId ? ' active' : '') + (f.content !== f.baseline ? ' dirty' : '');
+    d.setAttribute('role', 'group'); d.setAttribute('aria-controls', 'editor'); d.tabIndex = f.id === activeId ? 0 : -1; d.setAttribute('aria-label', f.name + (f.content !== f.baseline ? '، تغييرات غير محفوظة' : ''));
     const dot = document.createElement('span'); dot.className = 'dot';
     const nm = document.createElement('span'); nm.dir = 'ltr'; nm.textContent = f.name;
     const x = document.createElement('span'); x.className = 'x'; x.setAttribute('role', 'button'); x.setAttribute('tabindex', '0'); x.setAttribute('aria-label', 'إغلاق التبويب ' + f.name); x.title = 'إغلاق التبويب'; x.innerHTML = ic('x', 's');
-    x.addEventListener('click', ev => { ev.stopPropagation(); closeTab(f.id); });\n    x.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); ev.stopPropagation(); closeTab(f.id); } });
+    x.addEventListener('click', ev => { ev.stopPropagation(); closeTab(f.id); });
+    x.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); ev.stopPropagation(); closeTab(f.id); } });
     d.title = f.id === activeId ? 'اضغط لإعادة تسمية الملف' : f.name;
     d.append(dot, nm, x);
-    d.addEventListener('click', () => { if (f.id === activeId) renameFile(); else { saveCursor(); activeId = f.id; render(); scheduleSave(); } });\n    d.addEventListener('keydown', ev => {\n      if (ev.target === x) return;\n      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); d.click(); return; }\n      if (ev.key !== 'ArrowLeft' && ev.key !== 'ArrowRight' && ev.key !== 'Home' && ev.key !== 'End') return;\n      ev.preventDefault();\n      const tabs = Array.from(tb.querySelectorAll('[role="tab"]'));\n      const at = tabs.indexOf(d);\n      const next = ev.key === 'Home' ? tabs[0] : ev.key === 'End' ? tabs[tabs.length - 1] : tabs[(at + (ev.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];\n      if (next) { next.focus(); next.click(); }\n    });
+    d.addEventListener('click', () => { if (f.id === activeId) renameFile(); else { saveCursor(); activeId = f.id; render(); scheduleSave(); } });
+    d.addEventListener('keydown', ev => {\n      if (ev.target === x) return;\n      if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); d.click(); return; }\n      if (ev.key !== 'ArrowLeft' && ev.key !== 'ArrowRight' && ev.key !== 'Home' && ev.key !== 'End') return;\n      ev.preventDefault();\n      const tabs = Array.from(tb.querySelectorAll('.filet[role="group"]'));\n      const at = tabs.indexOf(d);\n      const next = ev.key === 'Home' ? tabs[0] : ev.key === 'End' ? tabs[tabs.length - 1] : tabs[(at + (ev.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];\n      if (next) { next.focus(); next.click(); }\n    });
     tb.appendChild(d); if (f.id === activeId) activeEl = d;
   });
   if (activeEl && activeEl.scrollIntoView) activeEl.scrollIntoView({ inline: 'center', block: 'nearest' });
