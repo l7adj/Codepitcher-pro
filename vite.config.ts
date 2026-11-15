@@ -5,6 +5,9 @@ import {defineConfig} from 'vite';
 
 export default defineConfig(() => {
   return {
+    // GitHub Pages serves this repository beneath /Codepitcher-pro/.
+    // Local development and other hosts continue to use the root path.
+    base: process.env.GITHUB_ACTIONS === 'true' ? '/Codepitcher-pro/' : '/',
     plugins: [react(), tailwindcss()],
     resolve: {
       alias: {
