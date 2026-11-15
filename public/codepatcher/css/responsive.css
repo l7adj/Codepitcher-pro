@@ -32,7 +32,9 @@ body.side-open > .symbol-bar {
 }
 
 /* ── الهواتف (< 480px): ملاءمة شريط المحرر بالكامل ── */
-@media (max-width: 480px) {\n  :root { --dw: min(94vw, 420px); --explorer-inset: 12px; }\n  .dtool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 480px) {
+  :root { --dw: min(94vw, 420px); --explorer-inset: 12px; }
+  .dtool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .bottom-bar { gap: 3px; padding-inline: 6px; }
   .bbtn { min-width: 32px; }
 }
