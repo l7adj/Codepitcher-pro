@@ -31,9 +31,18 @@ All 5 CSS files are registered in `sw.js` (`codepatcher-v21`).
 - `<meta name="theme-color">` reads `--surface-app` dynamically from computed styles.
 - Every dialog — including Project Management (`openManage`), Save (`saveMenu`, `saveAsDialog`), Export (`exportDialog`, `exportBundleDialog`), Bundle Import (`importBundleText`), Settings, Palette, Snapshots, Self-Test, Ambiguity Picker, and Patch History — uses semantic classes and shared UI template helpers (`uiRow`, `uiScroll`, `uiNote`, `uiEmpty`, `uiSub`) defined in `js/06-ui-core.js`, with zero hardcoded visual `style="..."` leaks.
 
-## Dialog & Mobile Workflow Layer\n\n- Import/export sheets (`#bnIn`, `#bnPrev`, `.bn-sec`), repair cards (`.errcard`), and file context actions (`#pop`, `.pi`) share touch-first sizing, safe-area padding, bounded scrolling, keyboard focus rings, and overflow-safe paths.\n- Dialog geometry is centralized in `tokens.css` (`--dialog-max-height`, `--dialog-preview-max`, `--dialog-field-height`, `--menu-item-height`); responsive.css owns only breakpoint behavior.\n- ZIP parsing, binary preservation, overwrite confirmation, import planning, and export execution remain in their existing operational modules; this layer changes presentation only.\n\n## JavaScript Boundaries
+## Dialog & Mobile Workflow Layer
+
+- Import/export sheets (`#bnIn`, `#bnPrev`, `.bn-sec`), repair cards (`.errcard`), and file context actions (`#pop`, `.pi`) share touch-first sizing, safe-area padding, bounded scrolling, keyboard focus rings, and overflow-safe paths.
+- Dialog geometry is centralized in `tokens.css` (`--dialog-max-height`, `--dialog-preview-max`, `--dialog-field-height`, `--menu-item-height`); responsive.css owns only breakpoint behavior.
+- ZIP parsing, binary preservation, overwrite confirmation, import planning, and export execution remain in their existing operational modules; this layer changes presentation only.
+
+## JavaScript Boundaries
 
 - Operational modules (`04`–`17`, `19`–`29`) retain full ownership of the patch engine, file CRUD, tabs, import/export, clipboard, versioning, storage, and self-tests.
 - `js/06-ui-core.js` provides declarative UI template helpers without altering any operational state or engine behavior.
-- The patch studio, version timeline/comparison, preview/console, and operation history use a shared mobile-first spacing and card system. Their geometry is token-driven; responsive.css only defines breakpoint behavior.\n- `17-drawer.js` owns RTL-aware drawer opening/closing gestures; `25-storage.js` renders semantic file/folder rows and keyboard-operable context actions without changing storage behavior.\n- `30-mobile-redesign.js` manages the Workspace Command Center (`#p-home`), live Recent Files quick switcher, and adaptive navigation shell.\n- `npm run check` runs `public/codepatcher/Tools/check.js` as an ES module and checks JavaScript syntax, script/style registration, and duplicate top-level declarations.
+- The patch studio, version timeline/comparison, preview/console, and operation history use a shared mobile-first spacing and card system. Their geometry is token-driven; responsive.css only defines breakpoint behavior.
+- `17-drawer.js` owns RTL-aware drawer opening/closing gestures; `25-storage.js` renders semantic file/folder rows and keyboard-operable context actions without changing storage behavior.
+- `30-mobile-redesign.js` manages the Workspace Command Center (`#p-home`), live Recent Files quick switcher, and adaptive navigation shell.
+- `npm run check` runs `public/codepatcher/Tools/check.js` as an ES module and checks JavaScript syntax, script/style registration, and duplicate top-level declarations.
 - CSS describes appearance and state; JavaScript remains the single authority for application state.
