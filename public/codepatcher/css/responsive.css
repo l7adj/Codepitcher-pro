@@ -486,3 +486,53 @@ body.side-open > .symbol-bar {
   }
   .settings-layout > .srow .btn { font-size: 11.5px; }
 }
+
+
+/* Import/export sheets and diagnostic actions: touch-first responsive behavior. */
+@media (max-width: 679px) {
+  .modal {
+    padding: 0 8px calc(8px + env(safe-area-inset-bottom));
+  }
+  .sheet {
+    width: 100%;
+    max-height: min(var(--dialog-max-height), calc(100dvh - env(safe-area-inset-top) - 8px));
+    border-radius: var(--radius-sheet) var(--radius-sheet) 12px 12px;
+    padding: 16px var(--sheet-pad-x) calc(16px + env(safe-area-inset-bottom));
+    gap: var(--sheet-gap);
+  }
+  .sheet::before {
+    position: sticky;
+    top: -16px;
+    z-index: 5;
+  }
+  .sheet h3 {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .sheet .srow > .btn { min-height: var(--touch-target); }
+  .sheet .bn-sec .mi { min-height: 50px; }
+  .errcard-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .errcard-actions .copy-ai { min-width: 0; padding-inline: 7px; }
+  #pop {
+    max-width: calc(100vw - 20px);
+    max-height: calc(100dvh - 24px - env(safe-area-inset-bottom));
+  }
+}
+@media (max-width: 370px) {
+  .sheet { padding-inline: 11px; }
+  .sheet .srow { gap: 6px; }
+  .sheet .srow > .btn { flex-basis: 100%; }
+  .errcard { padding: 10px; }
+  .errcard-head { flex-direction: column; gap: 5px; }
+  .errcard-row { flex-direction: column; gap: 2px; }
+  .errcard-row .k { flex-basis: auto; }
+  .errcard-actions { grid-template-columns: 1fr; }
+}
+@media (min-width: 680px) {
+  .modal { padding: 18px; }
+  .sheet {
+    max-height: min(var(--dialog-max-height), calc(100dvh - 36px));
+    border-radius: var(--radius-sheet);
+  }
+  #bnIn { min-height: 220px; }
+}
