@@ -22,7 +22,7 @@ Keep this exact load order:
 4. `css/layouts.css`
 5. `css/responsive.css`
 
-All 5 CSS files are registered in `sw.js` (`codepatcher-v20`).
+All 5 CSS files are registered in `sw.js` (`codepatcher-v21`).
 
 ## Central Theme & Customization Mechanism
 
@@ -31,7 +31,7 @@ All 5 CSS files are registered in `sw.js` (`codepatcher-v20`).
 - `<meta name="theme-color">` reads `--surface-app` dynamically from computed styles.
 - Every dialog — including Project Management (`openManage`), Save (`saveMenu`, `saveAsDialog`), Export (`exportDialog`, `exportBundleDialog`), Bundle Import (`importBundleText`), Settings, Palette, Snapshots, Self-Test, Ambiguity Picker, and Patch History — uses semantic classes and shared UI template helpers (`uiRow`, `uiScroll`, `uiNote`, `uiEmpty`, `uiSub`) defined in `js/06-ui-core.js`, with zero hardcoded visual `style="..."` leaks.
 
-## JavaScript Boundaries
+## Dialog & Mobile Workflow Layer\n\n- Import/export sheets (`#bnIn`, `#bnPrev`, `.bn-sec`), repair cards (`.errcard`), and file context actions (`#pop`, `.pi`) share touch-first sizing, safe-area padding, bounded scrolling, keyboard focus rings, and overflow-safe paths.\n- Dialog geometry is centralized in `tokens.css` (`--dialog-max-height`, `--dialog-preview-max`, `--dialog-field-height`, `--menu-item-height`); responsive.css owns only breakpoint behavior.\n- ZIP parsing, binary preservation, overwrite confirmation, import planning, and export execution remain in their existing operational modules; this layer changes presentation only.\n\n## JavaScript Boundaries
 
 - Operational modules (`04`–`17`, `19`–`29`) retain full ownership of the patch engine, file CRUD, tabs, import/export, clipboard, versioning, storage, and self-tests.
 - `js/06-ui-core.js` provides declarative UI template helpers without altering any operational state or engine behavior.
