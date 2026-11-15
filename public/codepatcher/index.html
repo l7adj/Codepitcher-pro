@@ -34,13 +34,13 @@
 
 <div class="tabbar" id="tabbar"></div>
 
-<div class="nav" aria-label="التنقل الرئيسي">
+<nav class="nav" role="navigation" aria-label="التنقل الرئيسي">
   <button type="button" class="nt" data-t="p-patch" onclick="switchTab('p-patch')"><svg class="ic s" aria-hidden="true"><use href="#i-wrench"/></svg> الباتشات</button>
   <button type="button" class="nt" data-t="p-v1" onclick="switchTab('p-v1')"><svg class="ic s" aria-hidden="true"><use href="#i-layers"/></svg> الإصدارات</button>
   <button type="button" class="nt active" data-t="p-edit" onclick="switchTab('p-edit')"><svg class="ic s" aria-hidden="true"><use href="#i-edit-square"/></svg> المحرر</button>
   <button type="button" class="nt" data-t="p-run" onclick="switchTab('p-run')"><svg class="ic s" aria-hidden="true"><use href="#i-monitor"/></svg> معاينة</button>
   <button type="button" class="nt" data-t="p-log" onclick="switchTab('p-log')"><svg class="ic s" aria-hidden="true"><use href="#i-list"/></svg> السجل</button>
-</div>
+</nav>>
 
 <div class="panels">
 
@@ -182,7 +182,7 @@
   <div class="dbody" id="dFiles">
     <div class="explorer-head">
       <div class="explorer-title"><span class="explorer-mark"><svg class="ic"><use href="#i-folder-open"/></svg></span><div><b>مستكشف المشروع</b><small id="explorerMeta">إدارة الملفات والمجلدات</small></div></div>
-      <span class="explorer-count" id="explorerCount">0 ملف</span>
+      <span class="explorer-count" id="explorerCount" aria-live="polite">0 ملف</span>
     </div>
     <label class="explorer-search"><svg class="ic"><use href="#i-search"/></svg><input type="text" id="dFilter" dir="auto" oninput="renderTree()" placeholder="ابحث عن ملف أو مجلد..." autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false"><button type="button" class="search-clr" id="dFilterClr" onclick="clearDrawerFilter()" hidden aria-label="مسح البحث"><svg class="ic xs" aria-hidden="true"><use href="#i-x"/></svg></button></label>
     <div class="dtool" id="dtool"></div>
