@@ -80,11 +80,11 @@ function fiOf(n) {
 function ckBox(on, attrs) { return "<span class='ck" + (on ? ' on' : '') + "' data-act='ck' " + attrs + '>' + ic(on ? 'check-square' : 'square') + '</span>'; }
 function rowFile(f, label) {
   const k = fiOf(label), on = selMode && selSet.has('f:' + f.id);
-  return "<div class='tr" + (f.id === activeId && !selMode ? ' act' : '') + (on ? ' chk' : '') + "' data-act='file' data-id='" + f.id + "'>" + (selMode ? ckBox(on, "data-k='file' data-id='" + f.id + "'") : '') + "<span class='fi fi-" + k + "'>" + ic('file-' + k) + "</span><span class='nm'>" + esc(label) + '</span>' + (f.content !== f.baseline ? "<span class='dtd' title='غير محفوظ'></span>" : '') + "<button type='button' class='mb' data-act='more' data-k='file' data-id='" + f.id + "' aria-label='المزيد'>" + ic('more') + '</button></div>';
+  return "<div class='tr" + (f.id === activeId && !selMode ? ' act' : '') + (on ? ' chk' : '') + "' role='button' tabindex='0' aria-label='فتح الملف: " + esc(label) + "' title='" + esc(f.name) + "' data-act='file' data-id='" + f.id + "'>" + (selMode ? ckBox(on, "data-k='file' data-id='" + f.id + "'") : '') + "<span class='fi fi-" + k + "'>" + ic('file-' + k) + "</span><span class='nm'>" + esc(label) + '</span>' + (f.content !== f.baseline ? "<span class='dtd' title='غير محفوظ'></span>" : '') + "<button type='button' class='mb' data-act='more' data-k='file' data-id='" + f.id + "' aria-label='المزيد'>" + ic('more') + '</button></div>';
 }
 function rowDir(p, name, cnt) {
   const on = selMode && selSet.has('d:' + p);
-  return "<div class='tr" + (on ? ' chk' : '') + "' data-p='" + esc(p) + "'>" + (selMode ? ckBox(on, "data-k='dir' data-p='" + esc(p) + "'") : '') + "<div class='tl' data-act='cd' data-p='" + esc(p) + "'><span class='fi fi-d'>" + ic('folder') + "</span><span class='nm'>" + esc(name) + "</span><span class='cnt'>" + cnt + "</span></div><button type='button' class='mb' data-act='more' data-k='dir' data-p='" + esc(p) + "' aria-label='المزيد'>" + ic('more') + '</button></div>';
+  return "<div class='tr" + (on ? ' chk' : '') + "' data-p='" + esc(p) + "'>" + (selMode ? ckBox(on, "data-k='dir' data-p='" + esc(p) + "'") : '') + "<button type='button' class='tl' data-act='cd' data-p='" + esc(p) + "' aria-label='فتح المجلد: " + esc(name) + "'><span class='fi fi-d'>" + ic('folder') + "</span><span class='nm'>" + esc(name) + "</span><span class='cnt'>" + cnt + "</span></button><button type='button' class='mb' data-act='more' data-k='dir' data-p='" + esc(p) + "' aria-label='المزيد'>" + ic('more') + '</button></div>';
 }
 function clearDrawerFilter() {
   const inp = $('dFilter'); if (!inp) return;
@@ -119,7 +119,7 @@ function popMenu(kind, key, row) {
   closePop();
   const isF = kind === 'file', f = isF ? files.find(x => x.id === key) : null; if (isF && !f) return;
   const path = isF ? f.name : key; row.classList.add('sel');
-  const it = (a, i, t, c) => "<div class='pi" + (c ? ' ' + c : '') + "' data-pa='" + a + "'>" + ic(i) + '<span>' + t + '</span></div>';
+  const it = (a, i, t, c) => "<button type='button' class='pi" + (c ? ' ' + c : '') + "' data-pa='" + a + "'>" + ic(i) + '<span>' + t + '</span></button>';
   const h = (isF ? it('open', 'file-txt', 'فتح') : it('cd', 'folder-open', 'فتح المجلد')) + it('ren', 'edit', 'إعادة تسمية') + it('sel', 'check-square', 'تحديد') + it('clipc', 'copy', 'نسخ (للصق في مكان آخر)') + it('clipx', 'tab', 'قص (للنقل)') + (!isF && clip ? it('pastehere', 'paste', 'لصق هنا') : '') + (isF ? it('dup', 'copy', 'نسخ الملف') : it('new', 'file-plus', 'ملف جديد هنا') + it('newf', 'folder-plus', 'مجلد جديد هنا')) + it('path', 'link', 'نسخ المسار') + (isF ? '' : it('zip', 'export', 'تصدير ZIP')) + "<div class='psep'></div>" + it('del', 'trash', 'حذف', 'dng');
   const b = document.createElement('div'); b.id = 'pback'; b.addEventListener('click', closePop);
   const p = document.createElement('div'); p.id = 'pop'; p.className = 'pop'; p.innerHTML = h; document.body.append(b, p);
