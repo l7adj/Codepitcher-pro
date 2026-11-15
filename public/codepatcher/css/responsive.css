@@ -198,16 +198,6 @@ body.side-open > .symbol-bar {
    Workspace Experience v2 — coherent screen architecture.
    Mobile-first; all dimensions resolve through the central token layer.
    ========================================================================== */
-:root {
-  --panel-inset: 14px;
-  --panel-gap: 14px;
-  --panel-card-pad: 14px;
-  --panel-editor-min: 230px;
-  --panel-content-max: 1280px;
-  --panel-toolbar-height: 52px;
-  --panel-sticky-offset: 0px;
-}
-
 /* Shared screen rhythm */
 #p-patch .form { padding: var(--panel-inset) var(--panel-inset) calc(24px + env(safe-area-inset-bottom)); }
 #p-patch .patch-workspace,
