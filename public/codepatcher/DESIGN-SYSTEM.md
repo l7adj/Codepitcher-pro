@@ -46,3 +46,10 @@ All 5 CSS files are registered in `sw.js` (`codepatcher-v21`).
 - `30-mobile-redesign.js` manages the Workspace Command Center (`#p-home`), live Recent Files quick switcher, and adaptive navigation shell.
 - `npm run check` runs `public/codepatcher/Tools/check.js` as an ES module and checks JavaScript syntax, script/style registration, and duplicate top-level declarations.
 - CSS describes appearance and state; JavaScript remains the single authority for application state.
+
+
+## File Explorer Interaction Layer (v22)
+- - File rows carry their own `data-id` and canonical `data-path`; context resolution must not infer a file from a nested action button.
+- Breadcrumbs are native buttons, search results expose a result heading, and file/folder action buttons retain explicit accessible names.
+- Multi-selection status reports file and directory counts while destructive operations continue through the existing confirmation and snapshot flows.
+- Touch long-press and keyboard ContextMenu / Shift+F10 share the same context-action resolver.
