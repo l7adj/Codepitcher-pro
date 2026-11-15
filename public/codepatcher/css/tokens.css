@@ -90,7 +90,7 @@
   --editor-tab-gap: 6px;
   --sheet-scroll-sm: 26vh;
   --sheet-scroll-md: 50vh;
-  --sheet-scroll-lg: 58vh;
+  --sheet-scroll-lg: 58vh;\n  --dialog-max-height: 90dvh;\n  --dialog-preview-max: 38vh;\n  --dialog-field-height: 46px;\n  --menu-item-height: 48px;
 
   /* ── الحركة والتركيز والطبقات ── */
   --motion-fast: 140ms;
