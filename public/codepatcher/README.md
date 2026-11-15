@@ -11,7 +11,7 @@
   4. `css/layouts.css` — تخطيطات الشاشات (الإطار العام، الرئيسية مع أحدث الملفات، المحرر، مستكشف الملفات، استوديو الباتشات، المعاينة والكونسول، السجل، والإصدارات).
   5. `css/responsive.css` — التجاوب وحالات التشغيل (`body.sym`، `body.runfs`، `body.side-open`، الهواتف الصغيرة، الأجهزة اللوحية، وحاسوب IDE بشاشتي Bento والباتشات المنقسمة).
 - `js/NN-اسم.js` — سكربتات عادية (ليست ES modules، لأن الملف المباشر `file://` لا يدعمها). تتشارك النطاق العام، والرقم هو ترتيب التحميل. دوال القوالب المشتركة للواجهات (`uiRow`، `uiScroll`، `uiNote`، `uiEmpty`، `uiSub`) موجودة في `js/06-ui-core.js`.
-- `sw.js` — service worker (`codepatcher-v21`)، يخزّن كل الملفات.
+- `sw.js` — service worker (`codepatcher-v22`)، يخزّن كل الملفات.
 - `js/16b-text-bundle.js` — تصدير المشروع كنص واحد (مع خريطة وتقسيم لأجزاء) واستيراده.
 - `Tools/check.js` — يعمل كـ ES module عبر `npm run check` من جذر المستودع، ويفحص صياغة JS والتسجيل وترتيب التحميل والأسماء العامة المكررة.
 
@@ -26,3 +26,10 @@
 8. بعد أي تعديل: شغّل `npm run check` ثم `npm run build`، وبعدها افتح التطبيق ← الإعدادات ← الاختبار الذاتي.
 
 لحدود مسؤوليات التصميم وقواعد التعديل والاختبار، راجع `DESIGN-SYSTEM.md`.
+
+
+### File explorer interaction pass (v22)
+- File tree rows now expose stable file identity on the row itself, so long-press/context-menu actions resolve files rather than being misclassified as folders.
+- Breadcrumbs are native buttons with navigation labels; search results are explicitly grouped and empty-search states are distinct from empty folders.
+- Multi-selection reports both file and folder counts; context actions support keyboard ContextMenu / Shift+F10 as well as touch and pointer interaction.
+- File storage, rename/move link-rewrite, clipboard, ZIP, and deletion workflows remain on their existing action paths.
