@@ -28,7 +28,7 @@ body.side-open > .tabbar,
 body.side-open > .nav,
 body.side-open > .panels,
 body.side-open > .symbol-bar {
-  transform: translateX(calc(-1 * var(--dw)));
+  transform: translateX(calc(0px - var(--dw)));
 }
 
 /* ── الهواتف (< 480px): ملاءمة شريط المحرر بالكامل ── */
