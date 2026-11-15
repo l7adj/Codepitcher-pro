@@ -409,3 +409,80 @@ body.side-open > .symbol-bar {
 @media (min-width: 680px) {
   :root { --editor-gutter-width: 52px; --editor-pad-inline: 16px; }
 }
+
+
+/* Settings workspace — grouped, scan-friendly controls with responsive option grids. */
+.sheet:has(.settings-layout) {
+  width: min(100%, 640px);
+  max-height: min(90dvh, 820px);
+  padding: 18px var(--sheet-pad-x) calc(18px + env(safe-area-inset-bottom));
+}
+.settings-layout { display: flex; flex-direction: column; gap: 9px; min-width: 0; }
+.settings-layout > h3 {
+  position: sticky;
+  top: -18px;
+  z-index: 4;
+  padding: 7px 0 10px;
+  background: var(--surface-modal);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.settings-layout > .slabel {
+  margin-top: 5px;
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 12px;
+}
+.settings-layout > .srow {
+  display: flex;
+  gap: 7px;
+  padding: 8px;
+  background: var(--surface-card-flat);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-card);
+}
+.settings-layout > .srow .btn {
+  min-width: 0;
+  min-height: 40px;
+  flex: 1 1 100px;
+  padding-inline: 8px;
+  white-space: normal;
+  line-height: 1.35;
+}
+.settings-layout > .srow:has(.fs-readout) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+}
+.settings-layout > .srow:has(.fs-readout) .btn { width: 100%; }
+.settings-layout > .srow:has([data-act="theme"]) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.settings-layout > .srow:has([data-act="accent"]) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.settings-layout > .srow:has([data-act="density"]),
+.settings-layout > .srow:has([data-act="radius"]) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.settings-layout > .srow:has([data-act="pal"]) {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.settings-layout > .srow:has([data-act="theme_reset"]) .btn { flex: 1 1 100%; }
+.settings-layout > .btn[data-ui="cancel"] {
+  position: sticky;
+  bottom: 0;
+  min-height: 46px;
+  background: var(--surface-modal);
+  box-shadow: 0 -8px 18px var(--surface-modal);
+}
+@media (max-width: 370px) {
+  .settings-layout > .srow:has([data-act="accent"]),
+  .settings-layout > .srow:has([data-act="pal"]) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .settings-layout > .srow .btn { font-size: 11.5px; }
+}
