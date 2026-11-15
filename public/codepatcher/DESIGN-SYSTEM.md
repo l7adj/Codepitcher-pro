@@ -22,7 +22,7 @@ Keep this exact load order:
 4. `css/layouts.css`
 5. `css/responsive.css`
 
-All 5 CSS files are registered in `sw.js` (`codepatcher-v19`).
+All 5 CSS files are registered in `sw.js` (`codepatcher-v20`).
 
 ## Central Theme & Customization Mechanism
 
