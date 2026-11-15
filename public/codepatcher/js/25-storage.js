@@ -80,7 +80,7 @@ function fiOf(n) {
 function ckBox(on, attrs) { return "<span class='ck" + (on ? ' on' : '') + "' data-act='ck' " + attrs + '>' + ic(on ? 'check-square' : 'square') + '</span>'; }
 function rowFile(f, label) {
   const k = fiOf(label), on = selMode && selSet.has('f:' + f.id);
-  return "<div class='tr" + (f.id === activeId && !selMode ? ' act' : '') + (on ? ' chk' : '') + "' role='button' tabindex='0' aria-label='فتح الملف: " + esc(label) + "' title='" + esc(f.name) + "' data-act='file' data-id='" + f.id + "'>" + (selMode ? ckBox(on, "data-k='file' data-id='" + f.id + "'") : '') + "<span class='fi fi-" + k + "'>" + ic('file-' + k) + "</span><span class='nm'>" + esc(label) + '</span>' + (f.content !== f.baseline ? "<span class='dtd' title='غير محفوظ'></span>" : '') + "<button type='button' class='mb' data-act='more' data-k='file' data-id='" + f.id + "' aria-label='المزيد'>" + ic('more') + '</button></div>';
+  return "<div class='tr" + (f.id === activeId && !selMode ? ' act' : '') + (on ? ' chk' : '') + "'>" + (selMode ? ckBox(on, "data-k='file' data-id='" + f.id + "'") : '') + "<button type='button' class='tl' data-act='file' data-id='" + f.id + "' aria-label='فتح الملف: " + esc(label) + "' title='" + esc(f.name) + "'><span class='fi fi-" + k + "'>" + ic('file-' + k) + "</span><span class='nm'>" + esc(label) + '</span>' + (f.content !== f.baseline ? "<span class='dtd' title='غير محفوظ'></span>" : '') + "</button><button type='button' class='mb' data-act='more' data-k='file' data-id='" + f.id + "' aria-label='المزيد'>" + ic('more') + '</button></div>';
 }
 function rowDir(p, name, cnt) {
   const on = selMode && selSet.has('d:' + p);
