@@ -484,7 +484,7 @@ header {
   font-size: var(--fs);
   line-height: var(--lh);
   user-select: none;
-  width: 46px;
+  width: var(--editor-gutter-width);
   contain: layout paint style;
 }
 #gInner { position: absolute; top: 0; right: 9px; text-align: right; white-space: pre; will-change: transform; }
@@ -492,7 +492,7 @@ header {
 .gn.cur { color: var(--color-primary-hover); font-weight: 700; }
 .edbox { position: relative; flex: 1; min-width: 0; overflow: hidden; }
 #hl { position: absolute; inset: 0; overflow: hidden; pointer-events: none; contain: layout paint style; }
-#hlInner { position: absolute; top: 0; left: 0; min-width: 100%; padding-inline: 12px; will-change: transform; }
+#hlInner { position: absolute; top: 0; left: 0; min-width: 100%; padding-inline: var(--editor-pad-inline); will-change: transform; }
 .ln { height: var(--lh); line-height: var(--lh); white-space: pre; }
 .ln.cur { background: var(--editor-line-cur); }
 #hlInner, #editor {
@@ -513,7 +513,7 @@ header {
   inset: 0;
   width: 100%;
   height: 100%;
-  padding: 12px 12px 60px;
+  padding: var(--editor-pad-block) var(--editor-pad-inline) 60px;
   margin: 0;
   border: 0;
   outline: 0;
