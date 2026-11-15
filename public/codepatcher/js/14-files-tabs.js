@@ -27,7 +27,7 @@ function render() {
       ev.preventDefault();
       const tabs = Array.from(tb.querySelectorAll('.filet[role="group"]'));
       const at = tabs.indexOf(d);
-      const next = ev.key === 'Home' ? tabs[0] : ev.key === 'End' ? tabs[tabs.length - 1] : tabs[(at + (ev.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+      const next = ev.key === 'Home' ? tabs[0] : ev.key === 'End' ? tabs[tabs.length - 1] : tabs[(at + (ev.key === 'ArrowLeft' ? 1 : -1) + tabs.length) % tabs.length];
       if (next) { next.focus(); next.click(); }
     });
     tb.appendChild(d); if (f.id === activeId) activeEl = d;
