@@ -97,11 +97,24 @@ function replaceProject() {
 let lpT = 0, lpFired = false;
 const treeEl = $('tree');
 treeEl.addEventListener('touchstart', e => {
-  lpFired = false; clearTimeout(lpT); const el = e.target;
-  lpT = setTimeout(() => { lpFired = true; try { if (navigator.vibrate) navigator.vibrate(15); } catch (x) { } ctxFromEl(el); }, 480);
+  const row = e.target.closest && e.target.closest('.tr');
+  if (!row || e.target.closest('input')) return;
+  lpFired = false; clearTimeout(lpT);
+  lpT = setTimeout(() => { lpFired = true; try { if (navigator.vibrate) navigator.vibrate(15); } catch (x) { } ctxFromEl(row); }, 480);
 }, { passive: true });
 ['touchend', 'touchmove', 'touchcancel'].forEach(t => treeEl.addEventListener(t, () => clearTimeout(lpT), { passive: true }));
-treeEl.addEventListener('contextmenu', e => { e.preventDefault(); clearTimeout(lpT); if (!lpFired) { lpFired = true; ctxFromEl(e.target); } });
+treeEl.addEventListener('contextmenu', e => {
+  const row = e.target.closest && e.target.closest('.tr');
+  if (!row) return;
+  e.preventDefault(); clearTimeout(lpT);
+  if (!lpFired) { lpFired = true; ctxFromEl(row); }
+});
+treeEl.addEventListener('keydown', e => {
+  if (e.key !== 'ContextMenu' && !(e.shiftKey && e.key === 'F10')) return;
+  const row = e.target.closest && e.target.closest('.tr');
+  if (!row) return;
+  e.preventDefault(); ctxFromEl(row);
+});
 treeEl.addEventListener('click', e => { if (lpFired) { lpFired = false; e.stopPropagation(); e.preventDefault(); } }, true);
 $('drawer').addEventListener('click', e => {
   const a = e.target.closest('[data-act]'); if (!a) return;
