@@ -640,3 +640,18 @@ textarea.plain:focus,
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 8v4M12 16h.01'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 8v4M12 16h.01'/%3E%3C/svg%3E");
 }
+
+
+/* Explorer context actions are real buttons, not pointer-only menu rows. */
+.pi {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: start;
+  font: inherit;
+  appearance: none;
+}
+.pi:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: -2px;
+}
