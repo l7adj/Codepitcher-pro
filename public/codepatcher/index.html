@@ -69,7 +69,7 @@
       <div id="gutter"><div id="gInner"></div></div>
       <div class="edbox">
         <div id="hl"><div id="hlInner"></div></div>
-        <textarea id="editor" wrap="off" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="// ابدأ كتابة الكود هنا..."></textarea>
+        <textarea id="editor" aria-label="محرر الكود" wrap="off" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="// ابدأ كتابة الكود هنا..."></textarea>
       </div>
     </div>
 
@@ -93,7 +93,7 @@
     </div>
   </section>
 
-  <section class="panel" id="p-patch">
+  <section class="panel" id="p-patch" aria-label="استوديو الباتشات وتطبيق التعديلات">
     <div class="form">
       <div class="patch-workspace">
         <div class="patch-compose">
@@ -136,17 +136,17 @@
     </div>
   </section>
 
-  <section class="panel" id="p-run">
+  <section class="panel" id="p-run" aria-label="معاينة تشغيل المشروع">
     <div class="runbar">
       <button type="button" class="main" onclick="runCode()">إعادة تشغيل</button>
       <button type="button" onclick="toggleFullscreen()" id="fsBtn" aria-label="ملء الشاشة"><svg class="ic" aria-hidden="true"><use href="#i-expand"/></svg></button>
       <button type="button" onclick="openInBrowser()" aria-label="فتح في المتصفح"><svg class="ic" aria-hidden="true"><use href="#i-external"/></svg></button>
     </div>
     <div class="verbar" id="verBar"><span id="vbLabel"></span><button type="button" class="pmini" id="vbOld" onclick="verNav(-1)">أقدم</button><button type="button" class="pmini" id="vbNew" onclick="verNav(1)">أحدث</button><button type="button" class="pmini" onclick="verCompare()">قارن بالحالي</button><button type="button" class="pmini" onclick="verRestore()">استرجاع</button><button type="button" class="pmini" onclick="hideVerBar()" aria-label="إغلاق" title="إغلاق"><svg class="ic xs" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-    <iframe id="runFrame" sandbox="allow-scripts allow-modals allow-forms allow-popups"></iframe>
+    <iframe id="runFrame" title="معاينة تشغيل المشروع" sandbox="allow-scripts allow-modals allow-forms allow-popups"></iframe>
     <div class="con-pane" id="conPane">
       <div class="con-head"><b class="con-title">Console</b><button type="button" class="hbtn" onclick="clearConsole()">مسح</button><button type="button" class="hbtn" onclick="copyConsole()">نسخ</button><button type="button" class="hbtn" onclick="toggleConsole()" aria-label="إغلاق"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button></div>
-      <div class="con-list" id="conList"></div>
+      <div class="con-list" id="conList" role="log" aria-live="polite" aria-label="رسائل وحدة التحكم"></div>
     </div>
     <div class="fab-group" id="fabGroup">
       <button type="button" class="fab-btn fs" onclick="toggleFullscreen()" aria-label="خروج من ملء الشاشة"><svg class="ic" aria-hidden="true"><use href="#i-shrink"/></svg></button>
@@ -154,15 +154,15 @@
     </div>
   </section>
 
-  <section class="panel" id="p-log">
+  <section class="panel" id="p-log" aria-label="سجل العمليات">
     <div class="log-toolbar">
       <button type="button" class="btn" onclick="clearLogs()">مسح السجل</button>
       <button type="button" class="btn primary" onclick="copyFullReport()">نسخ تقرير AI</button>
     </div>
-    <div class="loglist" id="logList"></div>
+    <div class="loglist" id="logList" role="log" aria-live="polite" aria-label="سجل عمليات التطبيق"></div>
   </section>
 
-  <section class="panel" id="p-v1"><div id="v1Body"></div></section>
+  <section class="panel" id="p-v1" aria-label="إدارة الإصدارات ومقارنة التغييرات"><div id="v1Body"></div></section>
 
 </div>
 
