@@ -1,0 +1,6 @@
+{
+  "name": "CodePatcher Pro",
+  "description": "CodePatcher Pro with unified 5-layer Design System architecture (tokens, themes, components, layouts, responsive).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
