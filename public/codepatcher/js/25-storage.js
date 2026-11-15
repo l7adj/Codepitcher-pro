@@ -84,7 +84,7 @@ function rowFile(f, label) {
 }
 function rowDir(p, name, cnt) {
   const on = selMode && selSet.has('d:' + p);
-  return "<div class='tr" + (on ? ' chk' : '') + "' data-p='" + esc(p) + "'>" + (selMode ? ckBox(on, "data-k='dir' data-p='" + esc(p) + "'") : '') + "<button type='button' class='tl' data-act='cd' data-p='" + esc(p) + "' aria-label='فتح المجلد: " + esc(name) + "'><span class='fi fi-d'>" + ic('folder') + "</span><span class='nm'>" + esc(name) + "</span><span class='cnt'>" + cnt + "</span></button><button type='button' class='mb' data-act='more' data-k='dir' data-p='" + esc(p) + "' aria-label='المزيد'>" + ic('more') + '</button></div>';
+  return "<div class='tr" + (on ? ' chk' : '') + "' data-p='" + esc(p) + "' data-path='" + esc(p) + "'>" + (selMode ? ckBox(on, "data-k='dir' data-p='" + esc(p) + "'") : '') + "<button type='button' class='tl' data-act='cd' data-p='" + esc(p) + "' aria-label='فتح المجلد: " + esc(name) + "'><span class='fi fi-d'>" + ic('folder') + "</span><span class='nm'>" + esc(name) + "</span><span class='cnt' aria-label='" + cnt + " ملف'>" + cnt + "</span></button><button type='button' class='mb' data-act='more' data-k='dir' data-p='" + esc(p) + "' aria-label='إجراءات المجلد: " + esc(name) + "' title='إجراءات المجلد'>" + ic('more') + '</button></div>';
 }
 function clearDrawerFilter() {
   const inp = $('dFilter'); if (!inp) return;
@@ -98,10 +98,14 @@ function renderTree() {
   if (countEl) countEl.textContent = files.length + ' ملف';
   if (metaEl) metaEl.textContent = folderCount + ' مجلد · ' + files.filter(f => f.content !== f.baseline).length + ' تغييرات غير محفوظة';
   if (clip) h += "<div class='issue clip-bar'><b>" + (clip.mode === 'cut' ? 'نقل' : 'نسخ') + ': ' + clip.list.length + " ملف</b><button type='button' class='pmini' data-act='paste'>لصق في: " + esc(treeCwd || 'الجذر') + "</button><button type='button' class='pmini' data-act='clipclr'>إلغاء</button></div>";
-  if (q) { files.filter(f => f.name.toLowerCase().includes(q)).map(f => ({ f, base: f.name })).sort(sortFiles).forEach(x => { h += rowFile(x.f, x.base); }); }
+  if (q) {
+    const matches = files.filter(f => f.name.toLowerCase().includes(q)).map(f => ({ f, base: f.name })).sort((a, b) => NAT.compare(a.base, b.base));
+    h += "<div class='tree-section-label search-results'><span>نتائج البحث</span><i>" + matches.length + " ملف</i></div>";
+    matches.forEach(x => { h += rowFile(x.f, x.base); });
+  }
   else {
-    let acc = ''; h += "<div class='tree-location'><span class='tree-location-label'>الموقع الحالي</span><div class='crumbs'><span class='cr' data-act='cd' data-p='' aria-label='الجذر'>" + ic('home') + '<b>الجذر</b></span>';
-    (treeCwd ? treeCwd.split('/') : []).forEach(p => { acc = acc ? acc + '/' + p : p; h += "<span class='cr' data-act='cd' data-p='" + esc(acc) + "'>› " + esc(p) + '</span>'; });
+    let acc = ''; h += "<div class='tree-location'><span class='tree-location-label'>الموقع الحالي</span><div class='crumbs' role='navigation' aria-label='مسار المجلد'><button type='button' class='cr' data-act='cd' data-p='' aria-label='الانتقال إلى الجذر'>" + ic('home') + '<b>الجذر</b></button>';
+    (treeCwd ? treeCwd.split('/') : []).forEach(p => { acc = acc ? acc + '/' + p : p; h += "<button type='button' class='cr' data-act='cd' data-p='" + esc(acc) + "' aria-label='فتح " + esc(acc) + "'>› " + esc(p) + '</button>'; });
     h += '</div></div>';
     const pre = treeCwd ? treeCwd + '/' : '', dirs = {}, fl = [];
     files.forEach(f => { if (!f.name.startsWith(pre)) return; const rest = f.name.slice(pre.length), i = rest.indexOf('/'); if (i < 0) fl.push({ f, base: rest }); else { const d = rest.slice(0, i); dirs[d] = (dirs[d] || 0) + 1; } });
@@ -111,7 +115,7 @@ function renderTree() {
     fl.sort(sortFiles).forEach((x, i) => { if (i === 0) h += "<div class='tree-section-label'><span>الملفات</span><i>" + fl.length + " ملف</i></div>"; h += rowFile(x.f, x.base); });
   }
   $('tree').classList.toggle('selmode', selMode);
-  $('tree').innerHTML = h || "<div class='explorer-empty'><span class='empty-icon'>" + ic('folder-open') + "</span><b>لا توجد عناصر هنا</b><small>أنشئ ملفاً أو مجلداً جديداً للبدء.</small></div>";
+  $('tree').innerHTML = h || "<div class='explorer-empty'><span class='empty-icon'>" + ic('folder-open') + "</span><b>" + (q ? 'لا توجد نتائج مطابقة' : 'هذا المجلد فارغ') + "</b><small>" + (q ? 'جرّب اسماً أو امتداداً مختلفاً.' : 'أنشئ ملفاً أو مجلداً جديداً للبدء.') + "</small></div>";
 }
 function ctxFromEl(el) { const r = el && el.closest && el.closest('.tr'); if (!r) return; if (selMode) { selToggle(r.dataset.id ? 'file' : 'dir', r.dataset.id || r.dataset.p); return; } popMenu(r.dataset.id ? 'file' : 'dir', r.dataset.id || r.dataset.p, r); }
 function closePop() { ['pop', 'pback'].forEach(id => { const e = $(id); if (e) e.remove(); }); document.querySelectorAll('.tr.sel').forEach(r => r.classList.remove('sel')); }
