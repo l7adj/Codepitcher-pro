@@ -32,7 +32,7 @@
   <button type="button" class="hbtn" onclick="openDrawer()" title="الملفات"><svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg></button>
 </header>
 
-<div class="tabbar" id="tabbar"></div>
+<div class="tabbar" id="tabbar" role="group" aria-label="الملفات المفتوحة"></div>
 
 <nav class="nav" role="navigation" aria-label="التنقل الرئيسي">
   <button type="button" class="nt" data-t="p-patch" onclick="switchTab('p-patch')"><svg class="ic s" aria-hidden="true"><use href="#i-wrench"/></svg> الباتشات</button>
@@ -74,8 +74,8 @@
     </div>
 
     <div class="status">
-      <span class="tap" id="stCursor" role="button" tabindex="0" onclick="goToLine()" title="انتقال إلى سطر">Ln 1, Col 1</span>
-      <span class="tap" id="stLint" role="button" tabindex="0" onclick="showProblems()" title="فحص مشاكل الأقواس والنصوص">—</span>
+      <button type="button" class="tap" id="stCursor" onclick="goToLine()" title="انتقال إلى سطر">Ln 1, Col 1</button>
+      <button type="button" class="tap" id="stLint" onclick="showProblems()" title="فحص مشاكل الأقواس والنصوص">—</button>
       <span id="stSize">0 chars</span>
     </div>
 
